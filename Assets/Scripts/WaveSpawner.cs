@@ -24,6 +24,7 @@ public class WaveInfo
 
 public class WaveSpawner : MonoBehaviour
 {
+	public GameState gameState;
 	public TextAsset wavesJson;
 	WaveInfo[] waves;
 
@@ -62,9 +63,19 @@ public class WaveSpawner : MonoBehaviour
 		waves = tempWaves.ToArray();
 	}
 
-	// starts at wave number 1
-	public void SpawnWave(int waveNum)
+	public void Update()
 	{
-		// spawn waves[waveNum-1]
-	}	
+		if (gameState.currentWave == 0) return;
+
+		foreach (Mob m in waves[gameState.currentWave-1])
+		{
+			if (!m.bHasSpawned && gameState.currentWaveTime > m.time)
+			{
+				//spawn the mob
+
+
+				m.bHasSpawned = true;
+			}
+		}
+	}
 }

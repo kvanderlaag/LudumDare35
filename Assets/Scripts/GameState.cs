@@ -19,6 +19,7 @@ public class GameState : MonoBehaviour
 {
 	public int numberOfWaves;
 	public int currentWave { get; private set; }
+	public float currentWaveTime { get; private set; }
 
 	public EWinState winState;
 	public EPhaseState phaseState;
