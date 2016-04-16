@@ -17,13 +17,14 @@ public class Mob
 	public bool bHasSpawned;
 }
 
-public struct WaveInfo
+public class WaveInfo
 {
-	public List<Mob> mobs;
+	public Mob[] mobs;
 }
 
 public class WaveSpawner : MonoBehaviour
 {
+	public TextAsset wavesJson;
 	WaveInfo[] waves;
 
 	public bool bAllMobsSpawned { get; private set; }
@@ -31,7 +32,7 @@ public class WaveSpawner : MonoBehaviour
 	public void Awake()
 	{
 		// read json file and construct data here
-		string waveFileStr = File.ReadAllText("path goes here");
+		string waveFileStr = wavesJson.text;
 		string[] wavesStrs = JsonHelper.GetJsonObjects(waveFileStr, "Wave");
 
 		List<WaveInfo> tempWaves = new List<WaveInfo>();
@@ -41,16 +42,20 @@ public class WaveSpawner : MonoBehaviour
 			WaveInfo wave = new WaveInfo();
 			string[] mobStrs = JsonHelper.GetJsonObjects(w, "Mob");
 
+			List<Mob> tempMobs = new List<Mob>();
+
 			foreach (string m in mobStrs)
 			{
 				// fill in the mob object values
+				Debug.Log(m + "\n");
 				Mob mob = JsonUtility.FromJson<Mob>(m);
 				mob.bHasSpawned = false;
 
 				// add the mob object to the wave
-				wave.mobs.Add(mob);
+				tempMobs.Add(mob);
 			}
-
+			
+			wave.mobs = tempMobs.ToArray();
 			tempWaves.Add(wave);
 		}
 
