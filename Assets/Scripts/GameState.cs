@@ -1,15 +1,81 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameState : MonoBehaviour {
+public enum EWinState
+{
+	WON,
+	LOST,
+	PLAYING
+}
 
-	// Use this for initialization
-	void Start () {
-	
+public enum EPhaseState
+{
+	ENEMYWAVE,
+	UPKEEP,
+	NONE
+}
+
+public class GameState : MonoBehaviour
+{
+	public int numberOfWaves;
+	public int currentWave { get; private set; }
+
+	public EWinState winState;
+	public EPhaseState phaseState;
+
+	public float upkeepDuration;
+	public float upkeepTimerCur { get; private set; }
+
+	public void GameOver()
+	{
+		winState = EWinState.LOST;
+		// gameover things happen here
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void WonGame()
+	{
+		winState = EWinState.WON;
+		// winning things happen here
+	}
+
+	public void WaveEnd()
+	{
+		phaseState = EPhaseState.UPKEEP;
+		if (currentWave >= numberOfWaves)
+		{
+			phaseState = EPhaseState.NONE;
+			WonGame();
+		}
+		else
+		{
+			EnterUpkeep();
+		}
+	}
+
+	public void WaveStart()
+	{
+		currentWave++;
+		// wave starting things happen here
+	}
+
+	public void EnterUpkeep()
+	{
+		phaseState = EPhaseState.UPKEEP;
+		upkeepTimerCur = upkeepDuration;
+		// start upkeep here
+	}
+
+	public void Update()
+	{
+		if (phaseState == EPhaseState.UPKEEP)
+		{
+			upkeepTimerCur -= Time.deltaTime;
+		}
+
+		if (upkeepTimerCur < 0f)
+		{
+			WaveStart();
+		}
+		
 	}
 }
