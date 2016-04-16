@@ -26,6 +26,8 @@ public class GameState : MonoBehaviour
 	public float upkeepDuration;
 	public float upkeepTimerCur { get; private set; }
 
+	public WaveSpawner waveSpawner;
+
 	public void GameOver()
 	{
 		winState = EWinState.LOST;

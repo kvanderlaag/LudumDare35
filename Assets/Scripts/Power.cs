@@ -10,14 +10,18 @@ public class Power : MonoBehaviour
 	public float cooldown;
 	private float cooldownTimerCur;
 
-	virtual public void Execute(Vector3 location)
+	virtual public bool Execute(Vector3 location)
 	{
+		if (cooldownTimerCur > 0f) return false;
+
 		Collider[] aoeCollisions = Physics.OverlapSphere(location, aoeRadius);
 
 		foreach (Collider c in aoeCollisions)
 		{
 			//apply damage using TakeDamage(damage) to all objects with healthcomp
 		}
+
+		return true;
 	}
 
 	virtual public void Update()

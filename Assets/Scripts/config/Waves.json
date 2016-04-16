@@ -1,0 +1,31 @@
+{
+	"Wave" : {
+		"Mob" : {
+			"Time" : 3,
+			"Type" : 1,
+			"Count" : 6
+		},
+		"Mob" : {
+			"Time" : 12,
+			"Type" : 2,
+			"Count" : 5
+		}
+	},
+	"Wave" : {
+		"Mob" : {
+			"Time" : 3,
+			"Type" : 2,
+			"Count" : 9
+		},
+		"Mob" : {
+			"Time" : 12,
+			"Type" : 3,
+			"Count" : 4
+		},
+		"Mob" : {
+			"Time" : 14,
+			"Type" : 0,
+			"Count" : 4
+		}
+	}
+}
