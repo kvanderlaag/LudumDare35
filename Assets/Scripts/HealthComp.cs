@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public enum EDamageType
 {
@@ -14,7 +15,7 @@ public struct DamageInfo
 	public bool bReveals;
 }
 
-public class HealthComp : Monobehavior
+public class HealthComp : MonoBehaviour
 {
 	public int maxHealth { get; private set; }
 	public int curHealth { get; private set; }
@@ -40,7 +41,7 @@ public class HealthComp : Monobehavior
 		}
 		else
 		{
-			curHealth -= damageInfo.damageAmount * 0.25f;
+			curHealth -= damageInfo.damageAmount / 4;
 			if (curHealth < 0)
 			{
 				MonsterDies();
