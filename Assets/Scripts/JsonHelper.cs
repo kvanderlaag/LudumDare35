@@ -1,14 +1,4 @@
-﻿
-Skip to content
-This repository
-
-    Pull requests
-    Issues
-    Gist
-
-    @Bekwnn
-
-// written by Bekwnn, 2015, planet earth, whatever.
+﻿// written by Bekwnn, 2015, planet earth, whatever.
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
