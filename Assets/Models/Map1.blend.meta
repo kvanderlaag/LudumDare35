@@ -226,6 +226,7 @@ ModelImporter:
     100436: Plane_317
     100438: Plane_318
     100440: Plane_319
+    100442: Plane_027
     400000: //RootNode
     400002: Plane_000
     400004: Plane_001
@@ -447,6 +448,7 @@ ModelImporter:
     400436: Plane_317
     400438: Plane_318
     400440: Plane_319
+    400442: Plane_027
     2300000: Plane_000
     2300002: Plane_001
     2300004: Plane_002
@@ -667,6 +669,7 @@ ModelImporter:
     2300434: Plane_317
     2300436: Plane_318
     2300438: Plane_319
+    2300440: Plane_027
     3300000: Plane_000
     3300002: Plane_001
     3300004: Plane_002
@@ -887,6 +890,7 @@ ModelImporter:
     3300434: Plane_317
     3300436: Plane_318
     3300438: Plane_319
+    3300440: Plane_027
     4300000: Plane_319
     4300002: Plane_318
     4300004: Plane_317
@@ -1107,6 +1111,7 @@ ModelImporter:
     4300434: Plane_026
     4300436: Plane_025
     4300438: Plane_028
+    4300440: Plane_027
     7400000: Default Take
     9500000: //RootNode
   materials:
