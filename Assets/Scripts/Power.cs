@@ -8,7 +8,7 @@ public class Power : MonoBehaviour
 	public bool bIsWeak;
 
 	public float cooldown;
-	private float cooldownTimerCur;
+	protected float cooldownTimerCur;
 
 	virtual public bool Execute(Vector3 location)
 	{
