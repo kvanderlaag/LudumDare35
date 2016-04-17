@@ -9,6 +9,11 @@ public class Projectile : MonoBehaviour
 
 	public void Update()
 	{
+		if (target == null)
+		{
+			Destroy(gameObject);
+		}
+
 		transform.LookAt(target.transform.position);
 
 		transform.position += transform.forward * projectileSpeed * Time.deltaTime;

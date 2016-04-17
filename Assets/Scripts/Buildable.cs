@@ -4,7 +4,7 @@ using System.Collections;
 public class Buildable : MonoBehaviour
 {
 	public GameObject tower;
-	public float towerConstructionOffset;
+	public Renderer thisRenderer;
 
 	public GameState gameState;
 	public GameObject builtObject; //object currently on the tile
@@ -28,7 +28,8 @@ public class Buildable : MonoBehaviour
 	{
 		GameObject newTower = Instantiate(tower);
 		newTower.transform.position = transform.position
-			+ new Vector3(0f, towerConstructionOffset, 0f);
+			+ new Vector3(0f, thisRenderer.bounds.extents.y, 0f);
+		newTower.transform.parent = transform;
 
 		newTower.GetComponent<Tower>().SwitchTowerInstant(startState);
 	}
