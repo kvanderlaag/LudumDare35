@@ -15,7 +15,10 @@ public class EnemyMobSpawn : MonoBehaviour {
 
 		int enemiesSpawned = 0;
 
-		GameObject tempEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.LookRotation(transform.forward, transform.up)) as GameObject;
+		GameObject tempEnemy = Instantiate(enemyPrefab) as GameObject;
+		Vector2 randomJitter = Random.insideUnitCircle * 0.2f;
+		tempEnemy.transform.position = transform.position + new Vector3(randomJitter.x, 0f, randomJitter.y) * transform.localScale.z;
+		tempEnemy.transform.rotation = Quaternion.LookRotation(transform.forward, transform.up);
         tempEnemy.transform.parent = transform;
         
 		enemiesSpawned++;
@@ -25,8 +28,8 @@ public class EnemyMobSpawn : MonoBehaviour {
 		int curRing = 1;
 		while (enemiesSpawned < enemyCount)
 		{
-			tempTransform.transform.position = transform.position + new Vector3(0,0,-0.2f * transform.localScale.z) + new Vector3(0f,0f,-0.4f * transform.localScale.z) * curRing;
-            //tempTransform.transform.position = new Vector3(tempTransform.transform.position.x * transform.localScale.x, tempTransform.transform.position.y, tempTransform.transform.position.z * transform.localScale.z);
+			tempTransform.transform.position = transform.position + new Vector3(0,0,-0.2f * transform.localScale.z)
+				+ new Vector3(0f,0f,-0.4f * transform.localScale.z) * curRing;
 			
 			if (offset)
 			{
@@ -35,8 +38,11 @@ public class EnemyMobSpawn : MonoBehaviour {
 
 			for (int i = 0; i < 6; i++)
 			{
-				tempEnemy = Instantiate(enemyPrefab, tempTransform.transform.position, Quaternion.LookRotation(transform.forward, transform.up)) as GameObject;
-                tempEnemy.transform.parent = transform;
+				GameObject tempEnemy2 = Instantiate(enemyPrefab) as GameObject;
+				Vector2 randomJitter2 = Random.insideUnitCircle * 0.2f;
+				tempEnemy2.transform.position = tempTransform.transform.position + new Vector3(randomJitter2.x, 0f, randomJitter2.y) * transform.localScale.z;
+				tempEnemy2.transform.rotation = Quaternion.LookRotation(transform.forward, transform.up);
+                tempEnemy2.transform.parent = transform;
 
 				tempTransform.transform.RotateAround(transform.position, transform.up, 60);
 
@@ -50,3 +56,4 @@ public class EnemyMobSpawn : MonoBehaviour {
         Destroy(tempTransform);
 	}
 }
+
