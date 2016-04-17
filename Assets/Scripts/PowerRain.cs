@@ -4,4 +4,11 @@ using System.Collections;
 public class PowerRain : Power
 {
 
+	public void Awake()
+	{
+		damage.damageType = EDamageType.ALIEN;
+		damage.damageAmount = 5;
+		damage.bReveals = true;
+	}
+
 }
