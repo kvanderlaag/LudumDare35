@@ -13,7 +13,7 @@ public class BullshitEnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.LookAt(playerHead);
-        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y + 180f, Mathf.Sin(Time.time) * 5f);
+        //transform.LookAt(playerHead);
+        //transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y + 180f, Mathf.Sin(Time.time) * 5f);
 	}
 }

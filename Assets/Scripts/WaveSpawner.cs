@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Collections;
 
 [Serializable]
 public class Mob
@@ -27,6 +28,10 @@ public class WaveSpawner : MonoBehaviour
 	public GameState gameState;
 	public TextAsset wavesJson;
 	WaveInfo[] waves;
+
+    public Transform enemyObject;
+    public Transform enemySpawn;
+    public float mobEnemyDelay;
 
 	public bool bAllMobsSpawned { get; private set; }
 
@@ -61,21 +66,32 @@ public class WaveSpawner : MonoBehaviour
 		}
 
 		waves = tempWaves.ToArray();
+        Debug.Log(waves.Length);
 	}
 
 	public void Update()
 	{
 		if (gameState.currentWave == 0) return;
-
-		foreach (Mob m in waves[gameState.currentWave-1])
+  
+		foreach (Mob m in waves[gameState.currentWave-1].mobs)
 		{
 			if (!m.bHasSpawned && gameState.currentWaveTime > m.time)
 			{
-				//spawn the mob
-
+                //spawn the mob
+                StartCoroutine(SpawnMob(m));
 
 				m.bHasSpawned = true;
 			}
 		}
 	}
+
+    IEnumerator SpawnMob(Mob m)
+    {
+        for (int i = 0; i < m.count; ++i)
+        {
+            Instantiate(enemyObject, enemySpawn.position, enemySpawn.rotation);
+            yield return new WaitForSeconds(mobEnemyDelay);
+        }
+        
+    }
 }

@@ -29,6 +29,13 @@ public class GameState : MonoBehaviour
 
 	public WaveSpawner waveSpawner;
 
+    public void Awake()
+    {
+        currentWave = 0;
+        upkeepTimerCur = upkeepDuration;
+        currentWaveTime = 0f;
+    }
+
 	public void GameOver()
 	{
 		winState = EWinState.LOST;
@@ -58,8 +65,9 @@ public class GameState : MonoBehaviour
 	public void WaveStart()
 	{
 		currentWave++;
-		// wave starting things happen here
-	}
+        phaseState = EPhaseState.ENEMYWAVE;
+        // wave starting things happen here
+    }
 
 	public void EnterUpkeep()
 	{
@@ -73,12 +81,15 @@ public class GameState : MonoBehaviour
 		if (phaseState == EPhaseState.UPKEEP)
 		{
 			upkeepTimerCur -= Time.deltaTime;
-		}
-
-		if (upkeepTimerCur < 0f)
-		{
-			WaveStart();
-		}
+            if (upkeepTimerCur < 0f)
+            {
+                WaveStart();
+            }
+        } else if (phaseState == EPhaseState.ENEMYWAVE)
+        {
+            currentWaveTime += Time.deltaTime;
+        }
+		
 		
 	}
 }
