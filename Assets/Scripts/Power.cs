@@ -17,7 +17,7 @@ public class Power : MonoBehaviour
 
 		Collider[] aoeCollisions = Physics.OverlapSphere(location, aoeRadius);
 
-		List<GameObject> enemiesHit = List<GameObject>();
+		List<GameObject> enemiesHit = new List<GameObject>();
 		foreach (Collider c in aoeCollisions)
 		{
 			if (c.gameObject.tag == "Enemy")
