@@ -10,7 +10,7 @@ public enum ETowerState
 
 public class Tower : MonoBehaviour
 {
-	public ETowerState towerState;
+	public ETowerState towerState { get; private set; }
 	public float towerSwitchTime;
 	public float towerSwitchTimerCur { get; private set; }
 	public bool bReady { get; private set; }
@@ -22,12 +22,18 @@ public class Tower : MonoBehaviour
 
 	public void SwitchTower(ETowerState newState)
 	{
-		if (newState == towerState) return;
-
 		bReady = false;
 		towerSwitchTimerCur = towerSwitchTime;
+
+		SwitchTowerInstant(newState);
+	}
+
+	public void SwitchTowerInstant(ETowerState newState)
+	{
+		if (newState == towerState) return;
+
 		towerState = newState;
-		
+
 		// a bit redundant, but we may want damage type seperate from tower state
 		switch (newState)
 		{
