@@ -5,11 +5,6 @@ public class EnemyMobSpawn : MonoBehaviour {
 
 	public GameObject enemyPrefab;
 
-	public void Awake()
-	{
-		SpawnMobs(7);
-	}
-
 	public void SpawnMobs(int enemyCount)
 	{
 		if (enemyCount < 1)
@@ -28,7 +23,7 @@ public class EnemyMobSpawn : MonoBehaviour {
 		int curRing = 1;
 		while (enemiesSpawned < enemyCount)
 		{
-			tempTransform.transform.position = transform.position + new Vector3(0f,0f,-0.6f) * curRing;
+			tempTransform.transform.position = transform.position + new Vector3(0,0,-0.2f) + new Vector3(0f,0f,-0.4f) * curRing;
 			
 			if (offset)
 			{
