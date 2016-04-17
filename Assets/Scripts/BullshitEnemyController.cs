@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BullshitEnemyController : MonoBehaviour {
 
+    public Transform enemyObject;
+
    	// Use this for initialization
 	void Start () {
         GetComponent<NavMeshAgent>().destination = GameObject.Find("GateSpawn").transform.position;
