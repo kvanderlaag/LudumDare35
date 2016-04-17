@@ -15,7 +15,7 @@ public struct DamageInfo
 	public bool bReveals;
 }
 
-public class HealthComp : MonoBehaviour
+public class Health : MonoBehaviour
 {
 	public int maxHealth { get; private set; }
 	public int curHealth { get; private set; }
