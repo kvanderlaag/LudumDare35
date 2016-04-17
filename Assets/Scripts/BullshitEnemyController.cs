@@ -3,13 +3,10 @@ using System.Collections;
 
 public class BullshitEnemyController : MonoBehaviour {
 
-    private Transform playerHead;
-
-	// Use this for initialization
+   	// Use this for initialization
 	void Start () {
         GetComponent<NavMeshAgent>().destination = GameObject.Find("GateSpawn").transform.position;
-        playerHead = GameObject.Find("Camera (head)").transform;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
