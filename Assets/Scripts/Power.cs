@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public class Power : MonoBehaviour
 {
@@ -17,7 +16,6 @@ public class Power : MonoBehaviour
 
 		Collider[] aoeCollisions = Physics.OverlapSphere(location, aoeRadius);
 
-		List<GameObject> enemiesHit = new List<GameObject>();
 		foreach (Collider c in aoeCollisions)
 		{
 			if (c.gameObject.tag == "Enemy")
