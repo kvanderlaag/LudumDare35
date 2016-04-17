@@ -53,7 +53,6 @@ public class WaveSpawner : MonoBehaviour
 			foreach (string m in mobStrs)
 			{
 				// fill in the mob object values
-				Debug.Log(m + "\n");
 				Mob mob = JsonUtility.FromJson<Mob>(m);
 				mob.bHasSpawned = false;
 

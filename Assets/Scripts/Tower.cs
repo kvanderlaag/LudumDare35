@@ -29,6 +29,7 @@ public class Tower : MonoBehaviour
 	public void Awake()
 	{
 		towerState = ETowerState.WEREWOLF;
+		bReady = true;
 	}
 
 	public void SwitchTower(ETowerState newState)
@@ -73,7 +74,6 @@ public class Tower : MonoBehaviour
 		{
 			bReady = true;
 		}
-
 		SeekUpdate();
 		FireUpdate();
 	}
@@ -140,7 +140,7 @@ public class Tower : MonoBehaviour
 		if (fireCDTimerCur <= 0f)
 			fireCDTimerCur = 0f;
 
-		if (target == null) return;
+		if (target == null || !bReady) return;
 
 		if (fireCDTimerCur <= 0f)
 		{
@@ -168,10 +168,12 @@ public class Tower : MonoBehaviour
 			Debug.Log("Null target when trying to launch projectile!");
 		}
 
-		Instantiate(shot);
+		Instantiate(shot, transform.position, Quaternion.identity);
 		Projectile projectileComp = shot.GetComponent<Projectile>();
 		projectileComp.damage = damage;
 		projectileComp.target = target;
+
+		Debug.Log(gameObject.name + " Shoot!");
 
 		fireCDTimerCur = fireRate;
 	}
