@@ -16,6 +16,9 @@ public class Tower : MonoBehaviour
 	public bool bReady { get; private set; }
 
 	public DamageInfo damage;
+	public float towerRadius;
+
+	public Projectile werewolfShot, vampireShot, alienshot;
 
 	public void SwitchTower(ETowerState newState)
 	{
@@ -45,6 +48,15 @@ public class Tower : MonoBehaviour
 	public void FireUpdate()
 	{
 		// check if any enemy in radius, attack nearest if so
+		Vector3 halfCapHeight = Vector3.up * 20f; // big so as to ignore 3rd dimension
+		RaycastHit[] enemiesInRange = Physics.CapsuleCastAll(transform.position + halfCapHeight, transform.position - halfCapHeight, towerRadius, Vector3.up);
+
+		foreach (RaycastHit enemyHit in enemiesInRange)
+		{
+			//check if hit is an enemy, then
+			//logic for picking target
+			//fire if able
+		}
 	}
 
 	public void Update()
