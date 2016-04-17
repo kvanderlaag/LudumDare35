@@ -78,7 +78,12 @@ public class WaveSpawner : MonoBehaviour
 			if (!m.bHasSpawned && gameState.currentWaveTime > m.time)
 			{
                 //spawn the mob
-                StartCoroutine(SpawnMob(m));
+                Transform tempEnemyMob = Instantiate(enemyObject, enemySpawn.position, enemySpawn.rotation) as Transform;
+                if (tempEnemyMob)
+                {
+                    tempEnemyMob.GetComponent<EnemyMobSpawn>().SpawnMobs(m.count);
+                }
+                //StartCoroutine(SpawnMob(m));
 
 				m.bHasSpawned = true;
 			}
@@ -87,11 +92,7 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnMob(Mob m)
     {
-        for (int i = 0; i < m.count; ++i)
-        {
-            Instantiate(enemyObject, enemySpawn.position, enemySpawn.rotation);
-            yield return new WaitForSeconds(mobEnemyDelay);
-        }
         
+        yield return null;        
     }
 }

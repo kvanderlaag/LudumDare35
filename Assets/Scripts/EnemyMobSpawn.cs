@@ -15,7 +15,9 @@ public class EnemyMobSpawn : MonoBehaviour {
 
 		int enemiesSpawned = 0;
 
-		Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+		GameObject tempEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.LookRotation(transform.forward, transform.up)) as GameObject;
+        tempEnemy.transform.parent = transform;
+        
 		enemiesSpawned++;
 
 		GameObject tempTransform = Instantiate(new GameObject()); //used to spawn enemies
@@ -23,7 +25,8 @@ public class EnemyMobSpawn : MonoBehaviour {
 		int curRing = 1;
 		while (enemiesSpawned < enemyCount)
 		{
-			tempTransform.transform.position = transform.position + new Vector3(0,0,-0.2f) + new Vector3(0f,0f,-0.4f) * curRing;
+			tempTransform.transform.position = transform.position + new Vector3(0,0,-0.2f * transform.localScale.z) + new Vector3(0f,0f,-0.4f * transform.localScale.z) * curRing;
+            //tempTransform.transform.position = new Vector3(tempTransform.transform.position.x * transform.localScale.x, tempTransform.transform.position.y, tempTransform.transform.position.z * transform.localScale.z);
 			
 			if (offset)
 			{
@@ -32,7 +35,8 @@ public class EnemyMobSpawn : MonoBehaviour {
 
 			for (int i = 0; i < 6; i++)
 			{
-				Instantiate(enemyPrefab, tempTransform.transform.position, Quaternion.identity);
+				tempEnemy = Instantiate(enemyPrefab, tempTransform.transform.position, Quaternion.LookRotation(transform.forward, transform.up)) as GameObject;
+                tempEnemy.transform.parent = transform;
 
 				tempTransform.transform.RotateAround(transform.position, transform.up, 60);
 
@@ -43,5 +47,6 @@ public class EnemyMobSpawn : MonoBehaviour {
 			offset = (offset)? false : true;
 			curRing++;
 		}
+        Destroy(tempTransform);
 	}
 }
