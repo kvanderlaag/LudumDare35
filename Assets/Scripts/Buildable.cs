@@ -3,12 +3,17 @@ using System.Collections;
 
 public class Buildable : MonoBehaviour
 {
-	public GameObject tower;
-	public Renderer thisRenderer;
+	//public GameObject tower;
+	private Renderer thisRenderer;
 
 	public GameState gameState;
 	public GameObject builtObject; //object currently on the tile
 	public GameObject towerPrefab;
+
+    public void Awake()
+    {
+        thisRenderer = GetComponent<Renderer>();
+    }
 
 	// selects this tile
 	public void SelectTile()
@@ -26,7 +31,7 @@ public class Buildable : MonoBehaviour
 
 	public void BuildTower(ETowerState startState)
 	{
-		GameObject newTower = Instantiate(tower);
+		GameObject newTower = Instantiate(towerPrefab);
 		newTower.transform.position = transform.position
 			+ new Vector3(0f, thisRenderer.bounds.extents.y, 0f);
 		newTower.transform.parent = transform;
