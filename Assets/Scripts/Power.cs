@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Power : MonoBehaviour
 {
@@ -10,15 +9,19 @@ public class Power : MonoBehaviour
 	public float cooldown;
 	protected float cooldownTimerCur;
 
+	// returns true if casted, returns false if cannot be casted
 	virtual public bool Execute(Vector3 location)
 	{
-		if (cooldownTimerCur > 0f) return false;
+		if (cooldownTimerCur > 0f) return false; // fails to cast
 
 		Collider[] aoeCollisions = Physics.OverlapSphere(location, aoeRadius);
 
 		foreach (Collider c in aoeCollisions)
 		{
-			//apply damage using TakeDamage(damage) to all objects with healthcomp
+			if (c.gameObject.tag == "Enemy")
+			{
+				c.gameObject.GetComponent<Health>().TakeDamage(damage);
+			}
 		}
 
 		return true;

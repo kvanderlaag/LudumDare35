@@ -3,8 +3,14 @@ using System.Collections;
 
 public class Buildable : MonoBehaviour
 {
+<<<<<<< HEAD
 	//public GameObject tower;
 	private Renderer thisRenderer;
+=======
+	public GameObject tower;
+	public Renderer thisRenderer;
+	public Renderer towerRenderer;
+>>>>>>> origin/master
 
 	public GameState gameState;
 	public GameObject builtObject; //object currently on the tile
@@ -31,9 +37,19 @@ public class Buildable : MonoBehaviour
 
 	public void BuildTower(ETowerState startState)
 	{
+<<<<<<< HEAD
 		GameObject newTower = Instantiate(towerPrefab);
 		newTower.transform.position = transform.position
 			+ new Vector3(0f, thisRenderer.bounds.extents.y, 0f);
+=======
+		GameObject newTower = Instantiate(tower);
+		newTower.transform.position = transform.position +
+			new Vector3(
+				0f,
+				thisRenderer.bounds.extents.y + towerRenderer.bounds.extents.y,
+				0f
+			);
+>>>>>>> origin/master
 		newTower.transform.parent = transform;
 
 		newTower.GetComponent<Tower>().SwitchTowerInstant(startState);
