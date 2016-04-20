@@ -7,7 +7,7 @@ public class PowerMoon : Power
 	public void Awake()
 	{
 		damage.damageType = EDamageType.WEREWOLF;
-		damage.damageAmount = 5;
+		damage.damageAmount = 4;
 		damage.bReveals = true;
 	}
 

@@ -34,8 +34,16 @@ public class SteamVR_TrackedController : MonoBehaviour
     public event ClickedEventHandler Ungripped;
 
     // Use this for initialization
-    void Start()
+    public void SetController()
     {
+        if (gameObject.name == "Controller (left)")
+        {
+            controllerIndex = transform.parent.GetComponent<SteamVR_ControllerManager>().leftIndex;
+        } else if (gameObject.name == "Controller (right)")
+        {
+            controllerIndex = transform.parent.GetComponent<SteamVR_ControllerManager>().rightIndex;
+        }
+
         if (this.GetComponent<SteamVR_TrackedObject>() == null)
         {
             gameObject.AddComponent<SteamVR_TrackedObject>();

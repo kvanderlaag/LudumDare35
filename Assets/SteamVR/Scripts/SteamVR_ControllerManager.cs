@@ -17,8 +17,8 @@ public class SteamVR_ControllerManager : MonoBehaviour
 	bool[] connected = new bool[OpenVR.k_unMaxTrackedDeviceCount]; // controllers only
 
 	// cached roles - may or may not be connected
-	uint leftIndex = OpenVR.k_unTrackedDeviceIndexInvalid;
-	uint rightIndex = OpenVR.k_unTrackedDeviceIndexInvalid;
+	public uint leftIndex = OpenVR.k_unTrackedDeviceIndexInvalid;
+	public uint rightIndex = OpenVR.k_unTrackedDeviceIndexInvalid;
 
 	void Awake()
 	{
@@ -198,10 +198,11 @@ public class SteamVR_ControllerManager : MonoBehaviour
 			{
 				if (connected[deviceIndex])
 				{
-					SetTrackedDeviceIndex(objectIndex++, deviceIndex);
+					SetTrackedDeviceIndex(objectIndex++, deviceIndex);               
 					break;
 				}
 			}
+
 		}
 		else
 		{
@@ -227,8 +228,21 @@ public class SteamVR_ControllerManager : MonoBehaviour
 			}
 		}
 
-		// Reset the rest.
-		while (objectIndex < objects.Length)
+        GameObject leftController = GameObject.Find("Controller (left)");
+        GameObject rightController = GameObject.Find("Controller (right)");
+        if (rightController)
+        {
+            GameObject.Find("Controller (right)").GetComponent<SteamVR_TrackedController>().SetController();
+        }
+
+        if (leftController)
+        {
+            GameObject.Find("Controller (left)").GetComponent<SteamVR_TrackedController>().SetController();
+        }
+        
+
+        // Reset the rest.
+        while (objectIndex < objects.Length)
 		{
 			SetTrackedDeviceIndex(objectIndex++, OpenVR.k_unTrackedDeviceIndexInvalid);
 		}

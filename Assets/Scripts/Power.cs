@@ -6,21 +6,26 @@ public class Power : MonoBehaviour
 	public float aoeRadius;
 	public bool bIsWeak;
 
+    public Transform particleEffect;
+
 	public float cooldown;
-	protected float cooldownTimerCur;
+	public float cooldownTimerCur { get; protected set; }
 
 	// returns true if casted, returns false if cannot be casted
 	virtual public bool Execute(Vector3 location)
 	{
 		if (cooldownTimerCur > 0f) return false; // fails to cast
 
+        cooldownTimerCur = cooldown;
+
 		Collider[] aoeCollisions = Physics.OverlapSphere(location, aoeRadius);
+        SpawnParticles(location);
 
 		foreach (Collider c in aoeCollisions)
 		{
-			if (c.gameObject.tag == "Enemy")
+			if (c.gameObject.CompareTag("Enemy"))
 			{
-				c.gameObject.GetComponent<Health>().TakeDamage(damage);
+                c.gameObject.GetComponent<Health>().TakeDamage(damage);
 			}
 		}
 
@@ -45,4 +50,10 @@ public class Power : MonoBehaviour
 	{
 		return (cooldownTimerCur > 0f)? false : true;
 	}
+
+    public void SpawnParticles(Vector3 location)
+    {
+        Instantiate(particleEffect, location, Quaternion.Euler(new Vector3(-90f, 0f, 0f)));
+        
+    }
 }

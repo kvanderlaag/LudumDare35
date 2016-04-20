@@ -5,6 +5,15 @@ public class EnemyMobSpawn : MonoBehaviour {
 
 	public GameObject enemyPrefab;
 
+    public EDamageType mobType;
+
+    private MobSounds sounds;
+
+    public void Awake()
+    {
+        sounds = GetComponent<MobSounds>();
+    }
+
 	public void SpawnMobs(int enemyCount)
 	{
 		if (enemyCount < 1)
@@ -20,6 +29,7 @@ public class EnemyMobSpawn : MonoBehaviour {
 		tempEnemy.transform.position = transform.position + new Vector3(randomJitter.x, 0f, randomJitter.y) * transform.localScale.z;
 		tempEnemy.transform.rotation = Quaternion.LookRotation(transform.forward, transform.up);
         tempEnemy.transform.parent = transform;
+        tempEnemy.GetComponent<Health>().monsterType = mobType;
         
 		enemiesSpawned++;
 
@@ -43,8 +53,9 @@ public class EnemyMobSpawn : MonoBehaviour {
 				tempEnemy2.transform.position = tempTransform.transform.position + new Vector3(randomJitter2.x, 0f, randomJitter2.y) * transform.localScale.z;
 				tempEnemy2.transform.rotation = Quaternion.LookRotation(transform.forward, transform.up);
                 tempEnemy2.transform.parent = transform;
+                tempEnemy2.GetComponent<Health>().monsterType = mobType;
 
-				tempTransform.transform.RotateAround(transform.position, transform.up, 60);
+                tempTransform.transform.RotateAround(transform.position, transform.up, 60);
 
 				enemiesSpawned++;
 				if (enemiesSpawned >= enemyCount)

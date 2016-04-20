@@ -17,6 +17,10 @@ public enum EPhaseState
 
 public class GameState : MonoBehaviour
 {
+
+    public int maxTowers { get; private set; }
+    public int curTowers;
+
 	public int numberOfWaves;
 	public int currentWave { get; private set; }
 	public float currentWaveTime { get; private set; }
@@ -29,28 +33,69 @@ public class GameState : MonoBehaviour
 
 	public WaveSpawner waveSpawner;
 
+    public int[] waveEnemies;
+
+    public Renderer instructionsRenderer;
+    public Material InstructionsMaterial, WinMaterial, LoseMaterial, AttackMaterial, UpkeepMaterial;
+
     public void Awake()
     {
+        phaseState = EPhaseState.NONE;
+        winState = EWinState.PLAYING;
+
+    }
+
+    public void StartGame()
+    {
+        Tower[] towers = GameObject.FindObjectsOfType<Tower>();
+        EnemyMobSpawn[] enemies = GameObject.FindObjectsOfType<EnemyMobSpawn>();
+        Gate[] gate = GameObject.FindObjectsOfType<Gate>();
+
+        foreach (Tower t in towers)
+        {
+            Destroy(t.gameObject);
+        }
+
+        foreach (EnemyMobSpawn e in enemies)
+        {
+            Destroy(e.gameObject);
+        }
+
+        foreach (Gate g in gate)
+        {
+            Destroy(g.gameObject);
+        }
+
+        GetComponent<GateSpawner>().SpawnGate();
+
+        curTowers = 0;
+        maxTowers = 5;
         currentWave = 0;
-        upkeepTimerCur = upkeepDuration;
+        
         currentWaveTime = 0f;
+        EnterUpkeep();
     }
 
 	public void GameOver()
 	{
+        phaseState = EPhaseState.NONE;
 		winState = EWinState.LOST;
+        instructionsRenderer.material = LoseMaterial;
 		// gameover things happen here
 	}
 
 	public void WonGame()
 	{
 		winState = EWinState.WON;
-		// winning things happen here
-	}
+        phaseState = EPhaseState.NONE;
+        instructionsRenderer.material = WinMaterial;
+        // winning things happen here
+    }
 
 	public void WaveEnd()
 	{
 		phaseState = EPhaseState.UPKEEP;
+        
 		if (currentWave >= numberOfWaves)
 		{
 			phaseState = EPhaseState.NONE;
@@ -62,10 +107,14 @@ public class GameState : MonoBehaviour
 		}
 	}
 
+    
+
 	public void WaveStart()
 	{
 		currentWave++;
+        currentWaveTime = 0;
         phaseState = EPhaseState.ENEMYWAVE;
+        instructionsRenderer.material = AttackMaterial;
         // wave starting things happen here
     }
 
@@ -73,8 +122,9 @@ public class GameState : MonoBehaviour
 	{
 		phaseState = EPhaseState.UPKEEP;
 		upkeepTimerCur = upkeepDuration;
-		// start upkeep here
-	}
+        instructionsRenderer.material = UpkeepMaterial;
+        // start upkeep here
+    }
 
 	public void Update()
 	{
@@ -88,6 +138,8 @@ public class GameState : MonoBehaviour
         } else if (phaseState == EPhaseState.ENEMYWAVE)
         {
             currentWaveTime += Time.deltaTime;
+            if (waveEnemies[currentWave] == 0)
+                WaveEnd();
         }
 		
 		
