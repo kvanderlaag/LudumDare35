@@ -9,6 +9,8 @@
 			"time" : 12,
 			"type" : 2,
 			"count" : 4
+<<<<<<< HEAD
+=======
 		}
 	},
 	"Wave" : {
@@ -26,6 +28,7 @@
 			"time" : 14,
 			"type" : 0,
 			"count" : 6
+>>>>>>> origin/master
 		}
 	},
 	"Wave" : {
@@ -48,6 +51,61 @@
 			"time" : 18,
 			"type" : 0,
 			"count" : 7
+		}
+	},
+	"Wave" : {
+		"Mob" : {
+			"time" : 3,
+			"type" : 2,
+			"count" : 3
+		},
+		"Mob" : {
+			"time" : 8,
+			"type" : 3,
+			"count" : 5
+<<<<<<< HEAD
+=======
+		},
+		"Mob" : {
+			"time" : 12,
+			"type" : 0,
+			"count" : 6
+>>>>>>> origin/master
+		},
+		"Mob" : {
+			"time" : 14,
+			"type" : 0,
+<<<<<<< HEAD
+			"count" : 6
+		}
+	},
+	"Wave" : {
+		"Mob" : {
+			"time" : 3,
+			"type" : 2,
+			"count" : 3
+		},
+		"Mob" : {
+			"time" : 12,
+			"type" : 0,
+			"count" : 5
+		},
+		"Mob" : {
+			"time" : 14,
+			"type" : 0,
+			"count" : 6
+=======
+			"count" : 8
+>>>>>>> origin/master
+		},
+		"Mob" : {
+			"time" : 18,
+			"type" : 0,
+<<<<<<< HEAD
+			"count" : 7
+=======
+			"count" : 10
+>>>>>>> origin/master
 		}
 	},
   "Wave": {
@@ -109,4 +167,6 @@
       "count": 12
     }
 	}
+
+
 }

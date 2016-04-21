@@ -89,6 +89,10 @@ public class Health : MonoBehaviour
 	public void MonsterDies()
 	{
 		curHealth = 0;
+<<<<<<< HEAD
+=======
+        gameState.waveEnemies[gameState.currentWave]--;
+>>>>>>> origin/master
         //monster dying things happen
         sounds.Die();
         StartCoroutine(FadeOut());
@@ -104,7 +108,10 @@ public class Health : MonoBehaviour
             backRenderer.material.color = new Color(backRenderer.material.color.r, backRenderer.material.color.b, backRenderer.material.color.g, Mathf.Lerp(1, 0, fadeOutElapsed / fadeOutDuration));
             yield return null;
         }
+<<<<<<< HEAD
         gameState.waveEnemies[gameState.currentWave]--;
+=======
+>>>>>>> origin/master
         Destroy(gameObject);
     }
 }
