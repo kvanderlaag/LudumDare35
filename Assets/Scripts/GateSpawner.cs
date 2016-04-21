@@ -7,7 +7,7 @@ public class GateSpawner : MonoBehaviour {
     public Transform gateSpawn;
 
 	// Use this for initialization
-	void Start () {
+	public void SpawnGate () {
         Instantiate(gateObject, gateSpawn.position, gateSpawn.rotation);
 	}
 }

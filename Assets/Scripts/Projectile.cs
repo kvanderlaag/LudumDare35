@@ -7,11 +7,13 @@ public class Projectile : MonoBehaviour
 	public DamageInfo damage;
 	public GameObject target;
 
+
 	public void Update()
 	{
 		if (target == null)
 		{
 			Destroy(gameObject);
+            return;
 		}
 
 		transform.LookAt(target.transform.position);
@@ -19,13 +21,13 @@ public class Projectile : MonoBehaviour
 		transform.position += transform.forward * projectileSpeed * Time.deltaTime;
 	}
 
-	public void OnCollisionEnter(Collision other)
+	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject == target)
 		{
 			target.GetComponent<Health>().TakeDamage(damage);
-		}
-
-		Destroy(gameObject);
+            //Debug.Log("Doing " + damage.damageAmount + " damage to " + other.gameObject.name);
+            Destroy(gameObject);
+        }		    
 	}
 }

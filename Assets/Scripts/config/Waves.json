@@ -3,29 +3,110 @@
 		"Mob" : {
 			"time" : 3,
 			"type" : 1,
-			"count" : 13
+			"count" : 3
 		},
 		"Mob" : {
 			"time" : 12,
 			"type" : 2,
-			"count" : 5
+			"count" : 4
 		}
 	},
 	"Wave" : {
 		"Mob" : {
 			"time" : 3,
 			"type" : 2,
-			"count" : 9
+			"count" : 3
 		},
 		"Mob" : {
 			"time" : 12,
 			"type" : 3,
-			"count" : 4
+			"count" : 5
 		},
 		"Mob" : {
 			"time" : 14,
 			"type" : 0,
-			"count" : 4
+			"count" : 6
 		}
+	},
+	"Wave" : {
+		"Mob" : {
+			"time" : 3,
+			"type" : 2,
+			"count" : 3
+		},
+		"Mob" : {
+			"time" : 12,
+			"type" : 0,
+			"count" : 5
+		},
+		"Mob" : {
+			"time" : 14,
+			"type" : 0,
+			"count" : 6
+		},
+		"Mob" : {
+			"time" : 18,
+			"type" : 0,
+			"count" : 7
+		}
+	},
+  "Wave": {
+    "Mob": {
+      "time": 3,
+      "type": 2,
+      "count": 3
+    },
+    "Mob": {
+      "time": 8,
+      "type": 3,
+      "count": 5
+    },
+    "Mob": {
+      "time": 12,
+      "type": 0,
+      "count": 6
+    },
+    "Mob": {
+      "time": 14,
+      "type": 0,
+      "count": 8
+    },
+    "Mob": {
+      "time": 18,
+      "type": 0,
+      "count": 10
+    },
+  }
+  "Wave" : {
+	  "Mob" : {
+			"time" : 3,
+			"type" : 2,
+			"count" : 3
+		},
+		"Mob" : {
+			"time" : 7,
+			"type" : 3,
+			"count" : 5
+		},
+		"Mob" : {
+			"time" : 12,
+			"type" : 0,
+			"count" : 6
+		},
+		"Mob" : {
+			"time" : 20,
+			"type" : 0,
+			"count" : 8
+		},
+    "Mob": {
+      "time": 25,
+      "type": 0,
+      "count": 10
+    },
+    "Mob": {
+      "time": 30,
+      "type": 0,
+      "count": 12
+    }
 	}
 }

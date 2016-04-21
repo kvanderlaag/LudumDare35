@@ -13,6 +13,8 @@ public class Tower : MonoBehaviour
 	public ETowerState towerState { get; private set; }
 	public GameObject target;
 
+    private TowerSounds sounds;
+
 	public float fireRate;
 	private float fireCDTimerCur;
 
@@ -26,15 +28,29 @@ public class Tower : MonoBehaviour
 
 	public GameObject werewolfShot, vampireShot, alienShot;
 
+    private Color vampireColor;
+    public Color werewolfColor, alienColor;
+    private Material towerColorMaterial;
+
 	public void Awake()
 	{
-		towerState = ETowerState.WEREWOLF;
-		bReady = true;
+        sounds = GetComponent<TowerSounds>();
+        damage = new DamageInfo();
+		towerState = ETowerState.VAMPIRE;
+        damage.damageType = EDamageType.VAMPIRE;
+        damage.damageAmount = 4;
+        bReady = true;
+        towerColorMaterial = GetComponent<Renderer>().materials[1];
+        vampireColor = towerColorMaterial.GetColor("_Color");
+        sounds.Place();
 	}
 
 	public void SwitchTower(ETowerState newState)
 	{
-		bReady = false;
+        if (!bReady)
+            return;
+
+        bReady = false;
 		towerSwitchTimerCur = towerSwitchTime;
 
 		SwitchTowerInstant(newState);
@@ -51,13 +67,16 @@ public class Tower : MonoBehaviour
 		{
 		case ETowerState.WEREWOLF:
 			damage.damageType = EDamageType.WEREWOLF;
+            towerColorMaterial.SetColor("_Color", werewolfColor);
 			break;
 		case ETowerState.VAMPIRE:
 			damage.damageType = EDamageType.VAMPIRE;
-			break;
+            towerColorMaterial.SetColor("_Color", vampireColor);
+            break;
 		case ETowerState.ALIEN:
 			damage.damageType = EDamageType.ALIEN;
-			break;
+            towerColorMaterial.SetColor("_Color", alienColor);
+            break;
 		default:
 			break;
 		}
@@ -168,12 +187,14 @@ public class Tower : MonoBehaviour
 			Debug.Log("Null target when trying to launch projectile!");
 		}
 
-		Instantiate(shot, transform.position, Quaternion.identity);
-		Projectile projectileComp = shot.GetComponent<Projectile>();
+		GameObject tempShot = Instantiate(shot, transform.position + new Vector3(0f, 0.1f, 0f), Quaternion.identity) as GameObject;
+		Projectile projectileComp = tempShot.GetComponent<Projectile>();
 		projectileComp.damage = damage;
 		projectileComp.target = target;
 
-		Debug.Log(gameObject.name + " Shoot!");
+        sounds.Attack();
+
+		//Debug.Log(gameObject.name + " Shoot!");
 
 		fireCDTimerCur = fireRate;
 	}

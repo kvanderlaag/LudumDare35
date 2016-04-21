@@ -17,47 +17,94 @@ public struct DamageInfo
 
 public class Health : MonoBehaviour
 {
-	public int maxHealth { get; private set; }
+
+    public RevealEnemy reveal;
+
+    public int maxHealth;
 	public int curHealth { get; private set; }
 
 	public EDamageType monsterType;
 	public bool bIsRevealed { get; private set; }
+
+    public GameState gameState;
+
+    public Renderer frontRenderer, backRenderer;
+    public float fadeOutDuration = 0.25f;
+    private float fadeOutElapsed = 0f;
+
+    private EnemySounds sounds;
+
+    public void Awake()
+    {
+        sounds = GetComponent<EnemySounds>();
+        reveal = GetComponent<RevealEnemy>();
+        curHealth = maxHealth;
+        gameState = GameObject.Find("Map").GetComponent<GameState>();
+    }
 
 	public void TakeDamage(DamageInfo damageInfo)
 	{
 		//reveal monster if damage type is correct
 		if (!bIsRevealed && damageInfo.damageType == monsterType && damageInfo.bReveals)
 		{
-			RevealMonster();
+            //Debug.Log("Revealing monster " + gameObject.name + " of type " + monsterType);
+			RevealMonster(damageInfo);
 		}
 
 		if (damageInfo.damageType == monsterType)
 		{
 			curHealth -= damageInfo.damageAmount;
-			if (curHealth < 0)
-			{
-				MonsterDies();
-			}
+            //Debug.Log(gameObject.name + " took " + damageInfo.damageAmount + " damage.");
+            if (curHealth <= 0)
+            {
+                MonsterDies();
+            } else
+            {
+                sounds.Hit();
+            }
+            
 		}
 		else
 		{
 			curHealth -= damageInfo.damageAmount / 4;
-			if (curHealth < 0)
+            //Debug.Log(gameObject.name + " took " + (damageInfo.damageAmount / 4) + " damage.");
+            if (curHealth <= 0)
 			{
 				MonsterDies();
-			}
+			} else
+            {
+                sounds.Hit();
+            }
 		}
 	}
 
-	private void RevealMonster()
+	private void RevealMonster(DamageInfo damageInfo)
 	{
 		bIsRevealed = true;
-		//do revealing stuff
+        //do revealing stuff
+        reveal.Reveal(damageInfo.damageType);
+        
 	}
 
 	public void MonsterDies()
 	{
 		curHealth = 0;
-		//monster dying things happen
+        //monster dying things happen
+        sounds.Die();
+        StartCoroutine(FadeOut());
+        //Destroy(gameObject);
 	}
+
+    IEnumerator FadeOut()
+    {
+        while (fadeOutElapsed < fadeOutDuration)
+        {
+            fadeOutElapsed = Mathf.Min(fadeOutDuration, fadeOutElapsed + Time.deltaTime);
+            frontRenderer.material.color = new Color(frontRenderer.material.color.r, frontRenderer.material.color.b, frontRenderer.material.color.g, Mathf.Lerp(1, 0, fadeOutElapsed / fadeOutDuration));
+            backRenderer.material.color = new Color(backRenderer.material.color.r, backRenderer.material.color.b, backRenderer.material.color.g, Mathf.Lerp(1, 0, fadeOutElapsed / fadeOutDuration));
+            yield return null;
+        }
+        gameState.waveEnemies[gameState.currentWave]--;
+        Destroy(gameObject);
+    }
 }

@@ -10,13 +10,34 @@ public class PlayerPowers : MonoBehaviour
 	public Power[] powers;
 	public int currentPowerIdx;
 
-	//how does this work?
-	GameObject remoteR;
-	GameObject remoteL;
+    public void Awake()
+    {
+        DamageInfo d = new DamageInfo();
+        d.bReveals = true;
+        d.damageAmount = 4;
+        
+        d.damageType = EDamageType.WEREWOLF;
 
-	public void AttemptExecutePower()
+        powers[0].damage = d;
+
+        d.bReveals = true;
+        d.damageAmount = 4;
+        d.damageType = EDamageType.VAMPIRE;
+
+        powers[1].damage = d;
+
+        d.bReveals = true;
+        d.damageAmount = 4;
+        d.damageType = EDamageType.ALIEN;
+
+        powers[2].damage = d;
+    }
+
+	public bool AttemptExecutePower(Vector3 executePos)
 	{
-		powers[currentPowerIdx].Execute(remoteR.transform.position);
+        if (powers[currentPowerIdx].Execute(executePos))
+            return true;
+        return false;
 	}
 
 	
