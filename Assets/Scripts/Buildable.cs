@@ -42,7 +42,7 @@ public class Buildable : MonoBehaviour
 		newTower.transform.parent = transform;
 
 		newTower.GetComponent<Tower>().SwitchTowerInstant(startState);
-        gameState.curTowers++;
+        
 	}
 
 	public void DemolishTower()

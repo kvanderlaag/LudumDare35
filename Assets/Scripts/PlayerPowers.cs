@@ -10,8 +10,19 @@ public class PlayerPowers : MonoBehaviour
 	public Power[] powers;
 	public int currentPowerIdx;
 
+    public bool isDay = true;
+
+    private Material sceneSkybox;
+    private Light sceneLight;
+    public float dayNightShiftTime = 1f;
+    public Color dayLightColor, nightLightColor;
+
     public void Awake()
     {
+        sceneSkybox = RenderSettings.skybox;
+        sceneLight = GameObject.Find("Directional light").GetComponent<Light>();
+        sceneLight.color = dayLightColor;
+        sceneSkybox.SetFloat("_Blend", 0f);
         DamageInfo d = new DamageInfo();
         d.bReveals = true;
         d.damageAmount = 4;
@@ -36,9 +47,52 @@ public class PlayerPowers : MonoBehaviour
 	public bool AttemptExecutePower(Vector3 executePos)
 	{
         if (powers[currentPowerIdx].Execute(executePos))
+        {
+            if (currentPowerIdx == 0 && isDay)
+            {
+                StartCoroutine(Night());
+            } else if (currentPowerIdx == 1 && !isDay)
+            {
+                StartCoroutine(Day());
+            }
+
             return true;
+            
+        }
+            
         return false;
 	}
+
+    IEnumerator Day()
+    {
+        float lerpAmount = sceneSkybox.GetFloat("_Blend");
+        float timeElapsed = 0f;
+        while (timeElapsed < dayNightShiftTime)
+        {
+            timeElapsed += Time.deltaTime;
+            lerpAmount = timeElapsed / dayNightShiftTime;
+            sceneSkybox.SetFloat("_Blend", 1f - lerpAmount);
+            sceneLight.color = Color.Lerp(nightLightColor, dayLightColor, lerpAmount);
+            yield return null;
+        }
+        isDay = true;
+        
+    }
+
+    IEnumerator Night()
+    {
+        float lerpAmount = sceneSkybox.GetFloat("_Blend");
+        float timeElapsed = 0f;
+        while (timeElapsed < dayNightShiftTime)
+        {
+            timeElapsed += Time.deltaTime;
+            lerpAmount = timeElapsed / dayNightShiftTime;
+            sceneSkybox.SetFloat("_Blend", lerpAmount);
+            sceneLight.color = Color.Lerp(dayLightColor, nightLightColor, lerpAmount);
+            yield return null;
+        }
+        isDay = false;
+    }
 
 	
 }

@@ -212,8 +212,8 @@ public class HandController : MonoBehaviour {
             {
                 if (pickup.gameObject.CompareTag("Tower"))
                 {
-                    gameState.curTowers--;
                     Destroy(pickup.gameObject);
+                    gameState.curTowers--;
                 }
             }
 
@@ -226,6 +226,7 @@ public class HandController : MonoBehaviour {
                 showLine = true;
                 lineRenderer.enabled = true;
                 circleRenderer.enabled = true;
+                gameState.curTowers++;
             }
         }
     }
@@ -255,7 +256,13 @@ public class HandController : MonoBehaviour {
                 {
                     if (rch.transform.gameObject.GetComponent<Buildable>().builtObject == null)
                         rch.transform.GetComponent<Buildable>().BuildTower(ETowerState.VAMPIRE);
+                } else
+                {
+                    gameState.curTowers--;
                 }
+            } else
+            {
+                gameState.curTowers--;
             }
 
             Destroy(holding.gameObject);
