@@ -18,11 +18,9 @@ public enum EPhaseState
 public class GameState : MonoBehaviour
 {
 
-<<<<<<< HEAD
+
     public DigitController[] timerDigits;
 
-=======
->>>>>>> origin/master
     public int maxTowers { get; private set; }
     public int curTowers;
 
@@ -45,10 +43,8 @@ public class GameState : MonoBehaviour
 
     public void Awake()
     {
-<<<<<<< HEAD
+
         HideTimer();
-=======
->>>>>>> origin/master
         phaseState = EPhaseState.NONE;
         winState = EWinState.PLAYING;
 
@@ -82,20 +78,16 @@ public class GameState : MonoBehaviour
         currentWave = 0;
         
         currentWaveTime = 0f;
-<<<<<<< HEAD
+
         GetComponent<GameSounds>().StartingSound();
-=======
->>>>>>> origin/master
         EnterUpkeep();
     }
 
 	public void GameOver()
 	{
-<<<<<<< HEAD
         HideTimer();
         GetComponent<GameSounds>().Lose();
-=======
->>>>>>> origin/master
+
         phaseState = EPhaseState.NONE;
 		winState = EWinState.LOST;
         instructionsRenderer.material = LoseMaterial;
@@ -104,13 +96,9 @@ public class GameState : MonoBehaviour
 
 	public void WonGame()
 	{
-<<<<<<< HEAD
         HideTimer();
         GetComponent<GameSounds>().Win();
         winState = EWinState.WON;
-=======
-		winState = EWinState.WON;
->>>>>>> origin/master
         phaseState = EPhaseState.NONE;
         instructionsRenderer.material = WinMaterial;
         // winning things happen here
@@ -119,11 +107,9 @@ public class GameState : MonoBehaviour
 	public void WaveEnd()
 	{
 		phaseState = EPhaseState.UPKEEP;
-<<<<<<< HEAD
+
         HideTimer();
-=======
-        
->>>>>>> origin/master
+
 		if (currentWave >= numberOfWaves)
 		{
 			phaseState = EPhaseState.NONE;
@@ -169,12 +155,8 @@ public class GameState : MonoBehaviour
         } else if (phaseState == EPhaseState.ENEMYWAVE)
         {
             currentWaveTime += Time.deltaTime;
-<<<<<<< HEAD
             WaveTimer();
             if (waveEnemies[currentWave] <= 0)
-=======
-            if (waveEnemies[currentWave] == 0)
->>>>>>> origin/master
                 WaveEnd();
         }
 		
