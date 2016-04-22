@@ -4,48 +4,30 @@ using System.Collections;
 public class BullshitEnemyController : MonoBehaviour {
 
     public Transform enemyObject;
+	public PathDirector nextTarget;
+	public float pathAcceptRadius;
 
     private NavMeshAgent navMeshAgent;
-    private bool bFoundPath = false;
-
-    public enum EPath
-    {
-        TOP,
-        BOTTOM
-    }
 
     public void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-    }
-
-   	// Use this for initialization
-	public void SetPath (EPath path) {
-        if (path == EPath.TOP)
-        {
-            navMeshAgent.destination = GameObject.Find("TopPath").transform.position;
-        } else if (path == EPath.BOTTOM)
-        {
-            navMeshAgent.destination = GameObject.Find("BottomPath").transform.position;
-        }
-        
-        
+		nextTarget = GameObject.Find("00 EnemySpawn").GetComponent<PathDirector>();
+		navMeshAgent.SetDestination(nextTarget.gameObject.transform.position);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (!bFoundPath)
+		Debug.Log((nextTarget.transform.position - transform.position).magnitude);
+        if (nextTarget != null && (nextTarget.transform.position - transform.position).magnitude < pathAcceptRadius)
         {
-            Vector3 target = new Vector3(navMeshAgent.destination.x, 0f, navMeshAgent.destination.z);
-            Vector3 actual = new Vector3(transform.position.x, 0f, transform.position.z);
-            if (target == actual)
-            {
-                navMeshAgent.destination = GameObject.Find("Gate(Clone)").transform.position;
-                bFoundPath = true;
-            }
-
-        }
-        //transform.LookAt(playerHead);
-        //transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y + 180f, Mathf.Sin(Time.time) * 5f);
+			Debug.Log("New target!");
+            nextTarget = nextTarget.GetPath();
+			if (nextTarget == null) navMeshAgent.ResetPath();
+			else
+			{
+				navMeshAgent.SetDestination(nextTarget.gameObject.transform.position);
+			}
+		}
 	}
 }

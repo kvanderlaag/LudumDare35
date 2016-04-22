@@ -107,16 +107,6 @@ public class WaveSpawner : MonoBehaviour
                         mType = EDamageType.ALIEN;
                     }
 
-                    int path = (int) Mathf.Ceil(UnityEngine.Random.Range(0f, 2f));
-                    if (path == 1)
-                    {
-                        tempEnemyMob.GetComponent<BullshitEnemyController>().SetPath(BullshitEnemyController.EPath.TOP);
-                    } else if (path == 2)
-                    {
-                        tempEnemyMob.GetComponent<BullshitEnemyController>().SetPath(BullshitEnemyController.EPath.BOTTOM);
-                    }
-
-
                     tempEnemyMob.GetComponent<EnemyMobSpawn>().mobType = mType;
                     tempEnemyMob.GetComponent<EnemyMobSpawn>().SpawnMobs(m.count);
                 }
