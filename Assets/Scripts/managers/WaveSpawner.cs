@@ -95,7 +95,8 @@ public class WaveSpawner : MonoBehaviour
                 {
                     EDamageType mType;
                     if (m.type == 0) {
-                        mType = (EDamageType) Mathf.Floor(UnityEngine.Random.Range(0.0f, 3.999f));
+                        int iType = UnityEngine.Random.Range(0, 3);
+                        mType = (EDamageType) iType;
                     } else if (m.type == 1)
                     {
                         mType = EDamageType.WEREWOLF;

@@ -12,7 +12,7 @@ public class BullshitEnemyController : MonoBehaviour {
     public void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-		nextTarget = GameObject.Find("00 EnemySpawn").GetComponent<PathDirector>();
+		nextTarget = GameObject.Find("00 EnemySpawn").GetComponent<PathDirector>().GetPath();
 		navMeshAgent.SetDestination(nextTarget.gameObject.transform.position);
     }
 	
@@ -20,7 +20,7 @@ public class BullshitEnemyController : MonoBehaviour {
 	void Update () {
         if (nextTarget != null && (nextTarget.transform.position - transform.position).magnitude < pathAcceptRadius)
         {
-			Debug.Log("New target!");
+			//Debug.Log("New target!");
             nextTarget = nextTarget.GetPath();
 			if (nextTarget == null) navMeshAgent.ResetPath();
 			else

@@ -12,7 +12,7 @@ public class PathDirector : MonoBehaviour
 		//there's a path the mob should try to take
 		if (nextPathNodes.Length == 0) return null;
 
-		int randPathIdx = Random.Range(0, nextPathNodes.Length-1);
+		int randPathIdx = Random.Range(0, nextPathNodes.Length);
 		return nextPathNodes[randPathIdx];
 	}
 }
