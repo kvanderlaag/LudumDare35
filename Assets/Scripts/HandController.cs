@@ -107,8 +107,11 @@ public class HandController : MonoBehaviour {
 
     void MenuClicked(object sender, ClickedEventArgs e)
     {
-        if (gameState.phaseState == EPhaseState.NONE)
+        if (gameState.phaseState == EPhaseState.NONE && !(gameState.winState == EWinState.PLAYING))
         {
+            int levelToLoad = Random.Range(1, 3);
+            SteamVR_LoadLevel.Begin("Level" + levelToLoad, true, 0.5f, 0f, 0f, 0f, 1f);
+        } else if (gameState.phaseState == EPhaseState.NONE && gameState.winState == EWinState.PLAYING) {
             gameState.StartGame();
         }
     }
