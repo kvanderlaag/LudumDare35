@@ -6,15 +6,16 @@ public class WaterController : MonoBehaviour {
     public float displacement = 0.02f;
 
     private float startOffset;
+    private float startY;
 
 	// Use this for initialization
 	void Start () {
-        startOffset = Random.Range(-1, 1);
-        transform.position = new Vector3(transform.position.x, startOffset, transform.position.y);
-	}
+        startY = transform.position.y;
+        startOffset = Random.Range(-2 * Mathf.PI, 2* Mathf.PI);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	
+        transform.position = new Vector3(transform.position.x, startY + (displacement * Mathf.Sin(Time.time + startOffset)), transform.position.z);
 	}
 }

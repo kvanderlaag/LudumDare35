@@ -109,7 +109,9 @@ public class HandController : MonoBehaviour {
     {
         if (gameState.phaseState == EPhaseState.NONE)
         {
-            gameState.StartGame();
+            int levelToLoad = Random.Range(1, 3);
+            SteamVR_LoadLevel.Begin("Level" + levelToLoad, true, 0.5f, 0f, 0f, 0f, 1f);
+            //gameState.StartGame();
         }
     }
 
