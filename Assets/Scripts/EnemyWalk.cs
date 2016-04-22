@@ -9,7 +9,7 @@ public class EnemyWalk : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        offset = Random.Range(-1f, 1f);
+        offset = UnityEngine.Random.Range(2 * -Mathf.PI, 2 * Mathf.PI);
 	}
 	
 	// Update is called once per frame

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public enum ETowerState
@@ -31,6 +32,8 @@ public class Tower : MonoBehaviour
     private Color vampireColor;
     public Color werewolfColor, alienColor;
     private Material towerColorMaterial;
+    private Material towerFlashMaterial;
+    private Color towerFlashBaseColor;
 
 	public void Awake()
 	{
@@ -41,6 +44,8 @@ public class Tower : MonoBehaviour
         damage.damageAmount = 4;
         bReady = true;
         towerColorMaterial = GetComponent<Renderer>().materials[1];
+        towerFlashMaterial = GetComponent<Renderer>().materials[0];
+        towerFlashBaseColor = towerFlashMaterial.color;
         vampireColor = towerColorMaterial.GetColor("_Color");
         sounds.Place();
 	}
@@ -54,6 +59,7 @@ public class Tower : MonoBehaviour
 		towerSwitchTimerCur = towerSwitchTime;
 
 		SwitchTowerInstant(newState);
+        StartCoroutine(Flash());
 	}
 
 	public void SwitchTowerInstant(ETowerState newState)
@@ -198,4 +204,18 @@ public class Tower : MonoBehaviour
 
 		fireCDTimerCur = fireRate;
 	}
+
+    IEnumerator Flash()
+    {
+        float lerpAmount = 0f;
+        float timeElapsed = 0f;
+
+        while (timeElapsed < towerSwitchTime)
+        {
+            timeElapsed += Time.deltaTime;
+            lerpAmount = timeElapsed / towerSwitchTime;
+            towerFlashMaterial.SetColor("_Color", Color.Lerp(Color.red, towerFlashBaseColor, lerpAmount));
+            yield return null;
+        }
+    }
 }
