@@ -18,7 +18,6 @@ public class BullshitEnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log((nextTarget.transform.position - transform.position).magnitude);
         if (nextTarget != null && (nextTarget.transform.position - transform.position).magnitude < pathAcceptRadius)
         {
 			Debug.Log("New target!");
