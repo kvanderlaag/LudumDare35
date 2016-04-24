@@ -75,7 +75,7 @@ public class HandController : MonoBehaviour {
         circleMaterial = circleRenderer.material;
         playerPowers = transform.parent.parent.GetComponent<PlayerPowers>();
 
-        SteamVR_TrackedController controller = transform.parent.GetComponent<SteamVR_TrackedController>();
+        controller = transform.parent.GetComponent<SteamVR_TrackedController>();
         controller.PadTouched += PadTouched;
         controller.PadUntouched += PadUntouched;
         controller.TriggerClicked += PadClicked;
@@ -109,8 +109,7 @@ public class HandController : MonoBehaviour {
     {
         if (gameState.phaseState == EPhaseState.NONE && !(gameState.winState == EWinState.PLAYING))
         {
-            int levelToLoad = Random.Range(1, 3);
-            SteamVR_LoadLevel.Begin("Level" + levelToLoad, true, 0.5f, 0f, 0f, 0f, 1f);
+            LoadLevel.Load();
         } else if (gameState.phaseState == EPhaseState.NONE && gameState.winState == EWinState.PLAYING) {
             gameState.StartGame();
         }
