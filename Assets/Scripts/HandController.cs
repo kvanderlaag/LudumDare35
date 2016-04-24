@@ -214,22 +214,23 @@ public class HandController : MonoBehaviour {
             {
                 if (pickup.gameObject.CompareTag("Tower"))
                 {
-                    Destroy(pickup.gameObject);
-                    gameState.curTowers--;
+                    pickup.parent = transform;
+                    holding = pickup;
+                    pickup.GetComponent<Tower>().PickUp();
+                    pickup = null;
                 }
-            }
-
-            if (gameState.curTowers < gameState.maxTowers)
+            } else if (gameState.curTowers < gameState.maxTowers)
             {
                 //Debug.Log("Clicked grip " + trackedObject.index);
-                holding = Instantiate(TowerObject, transform.position, Quaternion.Euler(new Vector3(-120f, 0f, 0f))) as Transform;
+                holding = Instantiate(TowerObject, transform.position, Quaternion.Euler(new Vector3(-90f, 0f, 0f))) as Transform;
                 holding.parent = transform;
                 sounds.Pickup();
-                showLine = true;
-                lineRenderer.enabled = true;
-                circleRenderer.enabled = true;
+                
                 gameState.curTowers++;
             }
+            showLine = true;
+            lineRenderer.enabled = true;
+            circleRenderer.enabled = true;
         }
     }
 
@@ -244,6 +245,7 @@ public class HandController : MonoBehaviour {
                 showLine = false;
                 lineRenderer.enabled = false;
                 circleRenderer.enabled = false;
+                gameState.curTowers--;
             }
             return;
         }
@@ -257,17 +259,21 @@ public class HandController : MonoBehaviour {
                 if (rch.transform.gameObject.CompareTag("Buildable"))  // Add condition to check to make sure no tower is already built;
                 {
                     if (rch.transform.gameObject.GetComponent<Buildable>().builtObject == null)
-                        rch.transform.GetComponent<Buildable>().BuildTower(ETowerState.VAMPIRE);
+                    {
+                        rch.transform.GetComponent<Buildable>().BuildTower(holding);
+                        
+                    }
                 } else
                 {
                     gameState.curTowers--;
+                    Destroy(holding.gameObject);
                 }
             } else
             {
                 gameState.curTowers--;
+                Destroy(holding.gameObject);
             }
-
-            Destroy(holding.gameObject);
+            
             holding = null;
             showLine = false;
             lineRenderer.enabled = false;

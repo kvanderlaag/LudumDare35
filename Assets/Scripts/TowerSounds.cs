@@ -6,7 +6,7 @@ public class TowerSounds : MonoBehaviour {
 
     private AudioSource source;
 
-    public AudioClip attackClip, placeClip;
+    public AudioClip attackClip, placeClip, switchClip;
 
     // Use this for initialization
     void Start()
@@ -27,4 +27,12 @@ public class TowerSounds : MonoBehaviour {
         source.clip = placeClip;
         source.Play();
     }
+
+    public void Switch()
+    {
+        source = GetComponent<AudioSource>();
+        source.clip = switchClip;
+        source.Play();
+    }
+
 }

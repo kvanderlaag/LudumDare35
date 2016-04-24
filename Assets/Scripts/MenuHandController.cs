@@ -5,6 +5,7 @@ public class MenuHandController : MonoBehaviour {
 
     private SteamVR_TrackedController controller;
     private SteamVR_TrackedObject trackedObject;
+    public MenuSounds sounds;
 
     // Use this for initialization
     void OnEnable()
@@ -25,6 +26,7 @@ public class MenuHandController : MonoBehaviour {
 
     void MenuClicked(object sender, ClickedEventArgs e)
     {
+        sounds.MenuSelect();
         LoadLevel.Load();
     }
 }

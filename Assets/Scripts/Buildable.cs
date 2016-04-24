@@ -30,18 +30,18 @@ public class Buildable : MonoBehaviour
 		}
 	}
 
-	public void BuildTower(ETowerState startState)
+	public void BuildTower(Transform newTower)
 	{
-		GameObject newTower = Instantiate(towerPrefab);
-		newTower.transform.position = transform.position +
+		newTower.position = transform.position +
 			new Vector3(
 				0f,
 				0f,
 				0f
 			);
+        newTower.rotation = Quaternion.Euler(new Vector3(-90f, 0f, 0f));
 		newTower.transform.parent = transform;
-
-		newTower.GetComponent<Tower>().SwitchTowerInstant(startState);
+        //builtObject = newTower.gameObject;
+        newTower.GetComponent<Tower>().Place();
         
 	}
 

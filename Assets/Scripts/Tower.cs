@@ -24,6 +24,8 @@ public class Tower : MonoBehaviour
 
 	public bool bReady { get; private set; }
 
+    public bool bIsPlaced { get; private set; }
+
 	public DamageInfo damage;
 	public float towerRadius;
 
@@ -35,36 +37,62 @@ public class Tower : MonoBehaviour
     private Material towerFlashMaterial;
     private Color towerFlashBaseColor;
 
-	public void Awake()
-	{
-        sounds = GetComponent<TowerSounds>();
+    public Renderer[] towerOperators;
+
+    public void PickUp()
+    {
+        bIsPlaced = false;
+        foreach (Renderer r in towerOperators)
+        {
+            r.enabled = false;
+        }
+    }
+
+    public void Awake()
+    {
+        foreach (Renderer r in towerOperators)
+        {
+            r.enabled = false;
+        }
+
         damage = new DamageInfo();
-		towerState = ETowerState.VAMPIRE;
+        towerState = ETowerState.VAMPIRE;
         damage.damageType = EDamageType.VAMPIRE;
         damage.damageAmount = 4;
-        bReady = true;
         towerColorMaterial = GetComponent<Renderer>().materials[1];
         towerFlashMaterial = GetComponent<Renderer>().materials[0];
         towerFlashBaseColor = towerFlashMaterial.color;
         vampireColor = towerColorMaterial.GetColor("_Color");
+    }
+
+	public void Place()
+	{
+        bIsPlaced = true;
+        foreach (Renderer r in towerOperators)
+        {
+            r.enabled = true;
+        }
+        sounds = GetComponent<TowerSounds>();
+        bReady = true;
         sounds.Place();
 	}
 
 	public void SwitchTower(ETowerState newState)
 	{
-        if (!bReady)
+        if (!bReady || !bIsPlaced)
             return;
 
         bReady = false;
 		towerSwitchTimerCur = towerSwitchTime;
 
 		SwitchTowerInstant(newState);
+        sounds.Switch();
         StartCoroutine(Flash());
 	}
 
 	public void SwitchTowerInstant(ETowerState newState)
 	{
-		if (newState == towerState) return;
+		if (newState == towerState || !bIsPlaced) return;
 
 		towerState = newState;
 
@@ -90,6 +118,9 @@ public class Tower : MonoBehaviour
 
 	public void Update()
 	{
+        if (!bIsPlaced)
+            return;
+
 		if (towerSwitchTimerCur > 0f)
 		{
 			towerSwitchTimerCur -= Time.deltaTime;
@@ -105,6 +136,9 @@ public class Tower : MonoBehaviour
 
 	public void SeekUpdate()
 	{
+        if (!bIsPlaced)
+            return;
+
 		if (target != null)
 		{
 			Vector2 flatTargetDist = new Vector2(
@@ -165,7 +199,7 @@ public class Tower : MonoBehaviour
 		if (fireCDTimerCur <= 0f)
 			fireCDTimerCur = 0f;
 
-		if (target == null || !bReady) return;
+		if (target == null || !bReady || !bIsPlaced) return;
 
 		if (fireCDTimerCur <= 0f)
 		{
@@ -188,6 +222,9 @@ public class Tower : MonoBehaviour
 
 	private void LaunchProjectile(GameObject shot)
 	{
+        if (!bIsPlaced)
+            return;
+
 		if (target == null)
 		{
 			Debug.Log("Null target when trying to launch projectile!");
