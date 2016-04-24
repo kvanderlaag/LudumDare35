@@ -13,7 +13,7 @@ public class BullshitEnemyController : MonoBehaviour {
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
 		nextTarget = GameObject.Find("00 EnemySpawn").GetComponent<PathDirector>().GetPath();
-		navMeshAgent.SetDestination(nextTarget.gameObject.transform.position);
+		navMeshAgent.SetDestination(nextTarget.transform.position);
     }
 	
 	// Update is called once per frame

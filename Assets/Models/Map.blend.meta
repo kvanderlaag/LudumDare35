@@ -331,6 +331,62 @@ ModelImporter:
     100646: Plane_468
     100648: Plane_469
     100650: Plane_470
+    100652: BorderTile
+    100654: BorderTile_001
+    100656: BorderTile_002
+    100658: BorderTile_003
+    100660: BorderTile_004
+    100662: BorderTile_005
+    100664: BorderTile_006
+    100666: BorderTile_007
+    100668: BorderTile_008
+    100670: BorderTile_009
+    100672: BorderTile_010
+    100674: BorderTile_011
+    100676: BorderTile_012
+    100678: BorderTile_013
+    100680: BorderTile_014
+    100682: BorderTile_015
+    100684: BorderTile_016
+    100686: BorderTile_017
+    100688: BorderTile_018
+    100690: BorderTile_019
+    100692: BorderTile_020
+    100694: BorderTile_021
+    100696: BorderTile_022
+    100698: BorderTile_023
+    100700: BorderTile_024
+    100702: BorderTile_025
+    100704: BorderTile_026
+    100706: BorderTile_027
+    100708: BorderTile_028
+    100710: BorderTile_029
+    100712: BorderTile_030
+    100714: BorderTile_031
+    100716: BorderTile_032
+    100718: BorderTile_033
+    100720: BorderTile_034
+    100722: BorderTile_035
+    100724: BorderTile_036
+    100726: BorderTile_037
+    100728: BorderTile_038
+    100730: BorderTile_039
+    100732: BorderTile_040
+    100734: BorderTile_041
+    100736: BorderTile_042
+    100738: BorderTile_043
+    100740: BorderTile_044
+    100742: BorderTile_045
+    100744: BorderTile_046
+    100746: BorderTile_047
+    100748: BorderTile_048
+    100750: BorderTile_049
+    100752: BorderTile_050
+    100754: BorderTile_051
+    100756: GrassTile
+    100758: SandTile
+    100760: StoneTile
+    100762: WaterTile
     400000: //RootNode
     400002: Plane
     400004: Plane_001
@@ -657,6 +713,62 @@ ModelImporter:
     400646: Plane_468
     400648: Plane_469
     400650: Plane_470
+    400652: BorderTile
+    400654: BorderTile_001
+    400656: BorderTile_002
+    400658: BorderTile_003
+    400660: BorderTile_004
+    400662: BorderTile_005
+    400664: BorderTile_006
+    400666: BorderTile_007
+    400668: BorderTile_008
+    400670: BorderTile_009
+    400672: BorderTile_010
+    400674: BorderTile_011
+    400676: BorderTile_012
+    400678: BorderTile_013
+    400680: BorderTile_014
+    400682: BorderTile_015
+    400684: BorderTile_016
+    400686: BorderTile_017
+    400688: BorderTile_018
+    400690: BorderTile_019
+    400692: BorderTile_020
+    400694: BorderTile_021
+    400696: BorderTile_022
+    400698: BorderTile_023
+    400700: BorderTile_024
+    400702: BorderTile_025
+    400704: BorderTile_026
+    400706: BorderTile_027
+    400708: BorderTile_028
+    400710: BorderTile_029
+    400712: BorderTile_030
+    400714: BorderTile_031
+    400716: BorderTile_032
+    400718: BorderTile_033
+    400720: BorderTile_034
+    400722: BorderTile_035
+    400724: BorderTile_036
+    400726: BorderTile_037
+    400728: BorderTile_038
+    400730: BorderTile_039
+    400732: BorderTile_040
+    400734: BorderTile_041
+    400736: BorderTile_042
+    400738: BorderTile_043
+    400740: BorderTile_044
+    400742: BorderTile_045
+    400744: BorderTile_046
+    400746: BorderTile_047
+    400748: BorderTile_048
+    400750: BorderTile_049
+    400752: BorderTile_050
+    400754: BorderTile_051
+    400756: GrassTile
+    400758: SandTile
+    400760: StoneTile
+    400762: WaterTile
     2300000: //RootNode
     2300002: Plane
     2300004: Plane_001
@@ -983,6 +1095,62 @@ ModelImporter:
     2300646: Plane_468
     2300648: Plane_469
     2300650: Plane_470
+    2300652: BorderTile
+    2300654: BorderTile_001
+    2300656: BorderTile_002
+    2300658: BorderTile_003
+    2300660: BorderTile_004
+    2300662: BorderTile_005
+    2300664: BorderTile_006
+    2300666: BorderTile_007
+    2300668: BorderTile_008
+    2300670: BorderTile_009
+    2300672: BorderTile_010
+    2300674: BorderTile_011
+    2300676: BorderTile_012
+    2300678: BorderTile_013
+    2300680: BorderTile_014
+    2300682: BorderTile_015
+    2300684: BorderTile_016
+    2300686: BorderTile_017
+    2300688: BorderTile_018
+    2300690: BorderTile_019
+    2300692: BorderTile_020
+    2300694: BorderTile_021
+    2300696: BorderTile_022
+    2300698: BorderTile_023
+    2300700: BorderTile_024
+    2300702: BorderTile_025
+    2300704: BorderTile_026
+    2300706: BorderTile_027
+    2300708: BorderTile_028
+    2300710: BorderTile_029
+    2300712: BorderTile_030
+    2300714: BorderTile_031
+    2300716: BorderTile_032
+    2300718: BorderTile_033
+    2300720: BorderTile_034
+    2300722: BorderTile_035
+    2300724: BorderTile_036
+    2300726: BorderTile_037
+    2300728: BorderTile_038
+    2300730: BorderTile_039
+    2300732: BorderTile_040
+    2300734: BorderTile_041
+    2300736: BorderTile_042
+    2300738: BorderTile_043
+    2300740: BorderTile_044
+    2300742: BorderTile_045
+    2300744: BorderTile_046
+    2300746: BorderTile_047
+    2300748: BorderTile_048
+    2300750: BorderTile_049
+    2300752: BorderTile_050
+    2300754: BorderTile_051
+    2300756: GrassTile
+    2300758: SandTile
+    2300760: StoneTile
+    2300762: WaterTile
     3300000: //RootNode
     3300002: Plane
     3300004: Plane_001
@@ -1309,6 +1477,62 @@ ModelImporter:
     3300646: Plane_468
     3300648: Plane_469
     3300650: Plane_470
+    3300652: BorderTile
+    3300654: BorderTile_001
+    3300656: BorderTile_002
+    3300658: BorderTile_003
+    3300660: BorderTile_004
+    3300662: BorderTile_005
+    3300664: BorderTile_006
+    3300666: BorderTile_007
+    3300668: BorderTile_008
+    3300670: BorderTile_009
+    3300672: BorderTile_010
+    3300674: BorderTile_011
+    3300676: BorderTile_012
+    3300678: BorderTile_013
+    3300680: BorderTile_014
+    3300682: BorderTile_015
+    3300684: BorderTile_016
+    3300686: BorderTile_017
+    3300688: BorderTile_018
+    3300690: BorderTile_019
+    3300692: BorderTile_020
+    3300694: BorderTile_021
+    3300696: BorderTile_022
+    3300698: BorderTile_023
+    3300700: BorderTile_024
+    3300702: BorderTile_025
+    3300704: BorderTile_026
+    3300706: BorderTile_027
+    3300708: BorderTile_028
+    3300710: BorderTile_029
+    3300712: BorderTile_030
+    3300714: BorderTile_031
+    3300716: BorderTile_032
+    3300718: BorderTile_033
+    3300720: BorderTile_034
+    3300722: BorderTile_035
+    3300724: BorderTile_036
+    3300726: BorderTile_037
+    3300728: BorderTile_038
+    3300730: BorderTile_039
+    3300732: BorderTile_040
+    3300734: BorderTile_041
+    3300736: BorderTile_042
+    3300738: BorderTile_043
+    3300740: BorderTile_044
+    3300742: BorderTile_045
+    3300744: BorderTile_046
+    3300746: BorderTile_047
+    3300748: BorderTile_048
+    3300750: BorderTile_049
+    3300752: BorderTile_050
+    3300754: BorderTile_051
+    3300756: GrassTile
+    3300758: SandTile
+    3300760: StoneTile
+    3300762: WaterTile
     4300000: Plane
     4300002: Plane_011
     4300004: Plane_010
@@ -1634,6 +1858,62 @@ ModelImporter:
     4300644: Plane_469
     4300646: Plane_468
     4300648: Plane_467
+    4300650: StoneTile
+    4300652: GrassTile
+    4300654: SandTile
+    4300656: WaterTile
+    4300658: BorderTile_005
+    4300660: BorderTile
+    4300662: BorderTile_051
+    4300664: BorderTile_050
+    4300666: BorderTile_049
+    4300668: BorderTile_048
+    4300670: BorderTile_047
+    4300672: BorderTile_046
+    4300674: BorderTile_045
+    4300676: BorderTile_044
+    4300678: BorderTile_043
+    4300680: BorderTile_042
+    4300682: BorderTile_041
+    4300684: BorderTile_040
+    4300686: BorderTile_039
+    4300688: BorderTile_038
+    4300690: BorderTile_037
+    4300692: BorderTile_036
+    4300694: BorderTile_035
+    4300696: BorderTile_034
+    4300698: BorderTile_033
+    4300700: BorderTile_032
+    4300702: BorderTile_031
+    4300704: BorderTile_030
+    4300706: BorderTile_029
+    4300708: BorderTile_028
+    4300710: BorderTile_027
+    4300712: BorderTile_026
+    4300714: BorderTile_025
+    4300716: BorderTile_024
+    4300718: BorderTile_023
+    4300720: BorderTile_022
+    4300722: BorderTile_021
+    4300724: BorderTile_020
+    4300726: BorderTile_019
+    4300728: BorderTile_018
+    4300730: BorderTile_017
+    4300732: BorderTile_016
+    4300734: BorderTile_015
+    4300736: BorderTile_014
+    4300738: BorderTile_013
+    4300740: BorderTile_012
+    4300742: BorderTile_011
+    4300744: BorderTile_010
+    4300746: BorderTile_009
+    4300748: BorderTile_008
+    4300750: BorderTile_007
+    4300752: BorderTile_006
+    4300754: BorderTile_004
+    4300756: BorderTile_002
+    4300758: BorderTile_001
+    4300760: BorderTile_003
     7400000: Default Take
     9500000: //RootNode
   materials:
