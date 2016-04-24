@@ -3,17 +3,18 @@ using System.Collections;
 
 public class ParticleController : MonoBehaviour {
 
-    private ParticleSystem ps;
+    public float duration = 5f;
+    private float elapsed = 0f;
 
 	// Use this for initialization
 	void Awake () {
-        ps = GetComponent<ParticleSystem>();
-        ps.Play();
+        elapsed = 0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (!ps.IsAlive())
+        elapsed += Time.deltaTime;
+        if (elapsed >= duration)
             Destroy(gameObject);
 	}
 }

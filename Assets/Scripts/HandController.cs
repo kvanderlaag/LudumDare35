@@ -78,10 +78,10 @@ public class HandController : MonoBehaviour {
         controller = transform.parent.GetComponent<SteamVR_TrackedController>();
         controller.PadTouched += PadTouched;
         controller.PadUntouched += PadUntouched;
-        controller.TriggerClicked += PadClicked;
+        controller.TriggerClicked += TriggerClicked;
         controller.Gripped += GripClicked;
         controller.Ungripped += GripUnclicked;
-        controller.PadClicked += TriggerClicked;
+        controller.PadClicked += PadClicked;
         controller.MenuButtonClicked += MenuClicked;
      
 
@@ -98,8 +98,8 @@ public class HandController : MonoBehaviour {
         controller.Ungripped -= GripUnclicked;
         controller.PadTouched -= PadTouched;
         controller.PadUntouched -= PadUntouched;
-        controller.TriggerClicked -= PadClicked;
-        controller.PadClicked -= TriggerClicked;
+        controller.TriggerClicked -= TriggerClicked;
+        controller.PadClicked -= PadClicked;
         controller.MenuButtonClicked -= MenuClicked;
      
 
@@ -115,7 +115,7 @@ public class HandController : MonoBehaviour {
         }
     }
 
-    void TriggerClicked(object sender, ClickedEventArgs e)
+    void PadClicked(object sender, ClickedEventArgs e)
     {
         if (!pickup)
             return;
@@ -191,16 +191,26 @@ public class HandController : MonoBehaviour {
         target = new Vector3();
     }
 
-    void PadClicked(object sender, ClickedEventArgs e)
+    void TriggerClicked(object sender, ClickedEventArgs e)
     {
         if (!target.Equals(new Vector3()))
         {
             if (playerPowers.AttemptExecutePower(target))
             {
-                var device = SteamVR_Controller.Input((int)trackedObject.index);
-                device.TriggerHapticPulse(1000);
+
+                StartCoroutine(SpellHaptic());
                 sounds.Spell();
             }
+        }
+    }
+
+    IEnumerator SpellHaptic()
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            var device = SteamVR_Controller.Input((int)trackedObject.index);
+            device.TriggerHapticPulse(1000);
+            yield return new WaitForSeconds(0.001f);
         }
     }
 
@@ -217,6 +227,9 @@ public class HandController : MonoBehaviour {
                     pickup.parent = transform;
                     holding = pickup;
                     pickup.GetComponent<Tower>().PickUp();
+                    showLine = true;
+                    lineRenderer.enabled = true;
+                    circleRenderer.enabled = true;
                     pickup = null;
                 }
             } else if (gameState.curTowers < gameState.maxTowers)
@@ -225,12 +238,12 @@ public class HandController : MonoBehaviour {
                 holding = Instantiate(TowerObject, transform.position, Quaternion.Euler(new Vector3(-90f, 0f, 0f))) as Transform;
                 holding.parent = transform;
                 sounds.Pickup();
-                
+                showLine = true;
+                lineRenderer.enabled = true;
+                circleRenderer.enabled = true;
                 gameState.curTowers++;
             }
-            showLine = true;
-            lineRenderer.enabled = true;
-            circleRenderer.enabled = true;
+            
         }
     }
 
@@ -285,7 +298,7 @@ public class HandController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-        if (showArc == true)
+        if (showArc == true && holding == null)
         {
             powerRenderer.transform.LookAt(Camera.main.transform);
             powerRenderer.transform.Rotate(Vector3.up, 180f);
@@ -386,7 +399,7 @@ public class HandController : MonoBehaviour {
 
 
 
-        } else if (showLine)
+        } else if (showLine && holding != null)
         {
             lineRenderer.SetVertexCount(2);
             lineRenderer.SetPosition(0, holding.position);

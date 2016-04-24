@@ -65,13 +65,14 @@ public class PlayerPowers : MonoBehaviour
 
     IEnumerator Day()
     {
-        float lerpAmount = sceneSkybox.GetFloat("_Blend");
+        float lerpAmount = 0f;
+        float startAmount = sceneSkybox.GetFloat("_Blend");
         float timeElapsed = 0f;
         while (timeElapsed < dayNightShiftTime)
         {
             timeElapsed += Time.deltaTime;
             lerpAmount = timeElapsed / dayNightShiftTime;
-            sceneSkybox.SetFloat("_Blend", 1f - lerpAmount);
+            sceneSkybox.SetFloat("_Blend", Mathf.Max(0f, startAmount - lerpAmount));
             sceneLight.color = Color.Lerp(nightLightColor, dayLightColor, lerpAmount);
             yield return null;
         }
@@ -81,13 +82,14 @@ public class PlayerPowers : MonoBehaviour
 
     IEnumerator Night()
     {
-        float lerpAmount = sceneSkybox.GetFloat("_Blend");
+        float lerpAmount = 0f;
+        float startAmount = sceneSkybox.GetFloat("_Blend");
         float timeElapsed = 0f;
         while (timeElapsed < dayNightShiftTime)
         {
             timeElapsed += Time.deltaTime;
             lerpAmount = timeElapsed / dayNightShiftTime;
-            sceneSkybox.SetFloat("_Blend", lerpAmount);
+            sceneSkybox.SetFloat("_Blend", Mathf.Min(1f, lerpAmount + startAmount));
             sceneLight.color = Color.Lerp(dayLightColor, nightLightColor, lerpAmount);
             yield return null;
         }

@@ -53,7 +53,7 @@ public class Power : MonoBehaviour
 
     public void SpawnParticles(Vector3 location)
     {
-        Instantiate(particleEffect, location, Quaternion.Euler(new Vector3(-90f, 0f, 0f)));
+        Instantiate(particleEffect, location, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
         
     }
 }
